@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ocean Depth</title>
+
+<style>
+body {
+  margin: 0;
+  height: 368000px;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* background laut */
+#ocean {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* footer area */
+#footerZone {
+  position: absolute;
+  top: 368000px;
+  width: 100%;
+  height: 1000px;
+  background: #111;
+}
+
+/* depth UI */
+#depthUI {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 0 10px black;
+}
+
+/* ikan */
+.fish {
+  position: absolute;
+  width: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+ /* teks */
+.text{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  text-shadow: 0 0 8px black;
+}
+.text2{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  color: white;
+  font-size: 26px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  text-shadow: 0 0 8px black;
+}
+.text3{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  color: white;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 12px;
+  text-shadow: 0 0 8px black;
+  text-align: center;
+}
+
+/* popup */
+#popup {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 15px 20px;
+  border-radius: 10px;
+  max-width: 300px;
+  display: none;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div id="ocean"></div>
+<div id="depthUI">0 m</div>
+
+<!-- AMBIL GAMBAR -->
+<!-- neritik -->
+<div id="floating1" class="text">ZONA NERITIK</div>
+<img id="terumbuKarang" class="fish" src="img/neritik/terumbukarang.png"/>
+<img id="terumbuKarang2" class="fish" src="img/neritik/terumbukarang.png"/>
+<img id="pausOrca" class="fish" src="img/neritik/orcaa.png"/>
+<img id="hiuPaus" class="fish" src="img/neritik/Hiu Paus.png"/>
+<img id="ikanBadut" class="fish" src="img/neritik/ikan badut.png"/>
+<img id="ikanKepeKepe" class="fish" src="img/neritik/ikan kepe-kepe.png"/>
+<img id="ikanKakap" class="fish" src="img/neritik/ikan kakap.png"/>
+<img id="ikanSinga" class="fish" src="img/neritik/ikan singa.png"/>
+<img id="kudaLaut" class="fish" src="img/neritik/Seahorse.png"/>
+<img id="ikanDamsel" class="fish" src="img/neritik/ikan damsel.png"/>
+<img id="ikanKakatua" class="fish" src="img/neritik/Parrotfish.png"/>
+<img id="ikanBotana" class="fish" src="img/neritik/Surgeonfish.png"/>
+<img id="ikanTuna" class="fish" src="img/neritik/Ikan tuna.png"/>
+<img id="ikanBuntal" class="fish" src="img/neritik/ikan buntal.png"/>
+<img id="ikanNori" class="fish" src="img/neritik/Wrasse.png"/>
+<img id="ikanAyamAyam" class="fish" src="img/neritik/Triggerfish.png"/>
+<img id="ikanGobi" class="fish" src="img/neritik/Goby.png"/>
+<img id="ikanPari" class="fish" src="img/neritik/Ikan pari.png"/>
+<img id="kerangKima" class="fish" src="img/neritik/Kerang Kima.png"/>
+<img id="ikanSarden" class="fish" src="img/neritik/Sardine.png"/>
+<div id="monas" class="text2">Monas Tenggelam</div>
+<div id="monasDesc" class="text3">Monumen Nasional dijatuhkan ke laut akan tenggelam.</div>
+<div id="eufotik" class="text2">Zona Eufotik</div>
+<div id="eufotikDesc" class="text3">Hanya 1% cahaya matahari yang dapat tembus.</div>
+<!-- batial -->
+<div id="floating2" class="text">ZONA BATIAL</div>
+<img id="cumiCumivampir" class="fish" src="img/batial/Cumi cumi vampir.png"/>
+<img id="ikanHantu" class="fish" src="img/batial/Barreleye.png"/>
+<img id="ikanLentera" class="fish" src="img/batial/ikan lantern.png"/>
+<img id="kapakAirTawar" class="fish" src="img/batial/Ikan hatchetfish.png"/>
+<img id="ikanNagaHitam" class="fish" src="img/batial/Dragonfish.png"/>
+<img id="loosejaw" class="fish" src="img/batial/Stoplight loosejaw.png"/>
+<img id="sabertooth" class="fish" src="img/batial/Sabertooth fish.png"/>
+<img id="ikanViper" class="fish" src="img/batial/ikan viper.png"/>
+<img id="bristlemouth" class="fish" src="img/batial/Bristlemouth.png"/>
+<img id="ikanTaring" class="fish" src="img/batial/Fangtooth.png"/>
+<img id="belutSpiny" class="fish" src="img/batial/Spiny eel.png"/>
+<img id="ikanTeleskop" class="fish" src="img/batial/ikan teleskop.png"/>
+<img id="slickhead" class="fish" src="img/batial/Slickhead fish.png"/>
+<img id="belutGulper" class="fish" src="img/batial/Gulper eel.png"/>
+<img id="ikanPenelanHitam" class="fish" src="img/batial/Black swallower_.png"/>
+<img id="oarRaksasa" class="fish" src="img/batial/Oar raksasa.png"/>
+<img id="blobFish" class="fish" src="img/batial/blobfish.png"/>
+<img id="kepitingLaba" class="fish" src="img/batial/kepiting laba.PNG"/>
+<img id="jaring" class="fish" style="filter: grayscale(40%) sepia(40%) brightness(90%); opacity: .15;" src="img/batial/jaring.PNG"/>
+<div id="burjKhalifa" class="text2">Burj Khalifa Tenggelam</div>
+<div id="burjKhalifaDesc" class="text3">Gedung tertinggi di dunia dijatuhkan ke laut akan tenggelam.</div>
+<div id="midnight" class="text2">Zona Tengah Malam</div>
+<div id="midnightDesc" class="text3">Cahaya matahari sudah tidak dapat tembus di sini.</div>
+<!-- abisal -->
+<div id="floating3" class="text">ZONA ABISAL</div>
+<img id="belutPelikan" class="fish" src="img/abisal/belut pelikan.png"/>
+<img id="hiuHantu" class="fish" src="img/abisal/⁠Chimaera (ghost shark),500–3000 m.png"/>
+<img id="belutSnipe" class="fish" src="img/abisal/Nemichthys scolopaceus.png"/>
+<img id="labalabaLautDalam" class="fish" src="img/abisal/labalautdalam.png"/>
+<img id="ikanKepalaHalus" class="fish" src="img/abisal/Alepocephalus rostratus.png"/>
+<img id="ikanTripod" class="fish" src="img/abisal/Bathypterois longipes → 1000–4000 m.png"/>
+<img id="ikanNagaAbisal" class="fish" src="img/abisal/Abyssal dragonfish → 1500–4000 m.png"/>
+<img id="anglerfish" class="fish" src="img/abisal/anglerfish.png"/>
+<img id="kodLautDalam" class="fish" src="img/abisal/⁠Deep-sea cod → 2000–5000 m_.png"/>
+<img id="brotula" class="fish" src="img/abisal/Brotula (deep-sea eel) → 2000–5000 m_7.png"/>
+<img id="belutCusk" class="fish" src="img/abisal/Abyssal cusk → 3000–6000 m.png"/>
+<img id="belutPout" class="fish" src="img/abisal/Eelpout → 2000–5000.png"/>
+<img id="belutMoncongTumpul" class="fish" src="img/abisal/Snubnose eel → 2000–4000 m _.png"/>
+<img id="pariLautDalam" class="fish" src="img/abisal/skate.png"/>
+<img id="flounder" class="fish" src="img/abisal/flounder.png"/>
+<img id="anglerfishLautDalam" class="fish" src="img/abisal/Deep-sea angler variant → 2000–4000 m_.png"/>
+<img id="grenadier" class="fish" src="img/abisal/Macrourid fish → 2000–6000 m_.png"/>
+<img id="belutLautDalamRaksasa" class="fish" src="img/abisal/Spectrunculus grandis.png"/>
+<img id="srg" class="fish" style="filter: grayscale(40%) sepia(40%) brightness(90%); opacity: .15;" src="img/abisal/ssriogrande.png"/>
+<div id="depth" class="text2">Kedalaman Standar</div>
+<div id="depthDesc" class="text3">Batas maksimal kedalaman rata-rata samudra di dunia.</div>
+<!-- hadal -->
+ <div id="floating4" class="text">ZONA HADAL</div>
+ <img id="hg" class="fish" src="img/hadal/Hirondellea gigas.png"/>
+  <img id="sf" class="fish" src="img/hadal/snailfish.png"/>
+<div id="everest" class="text2">Everest Tenggelam</div>
+<div id="everestDesc" class="text3">Gunung tertinggi di dunia akan tenggelam di sini.</div>
+<div id="mariana" class="text2">Dasar Lautan</div>
+<div id="marianaDesc" class="text3">Kedalaman maksimal Palung Mariana.</div>
+
+<!-- footer -->
+<div id="footerZone"></div>
+
+<!-- menampilkan informasi dari objek -->
+<div id="popup">
+  <p id="popupText"></p>
+  <button onclick="closePopup()">Tutup</button>
+</div>
+
+<script>
+const ocean = document.getElementById("ocean");
+const depthUI = document.getElementById("depthUI");
+const scrollSpeed = 0.03;
+
+// warna laut bergradasi
+function getOceanColor(depth) {
+
+  if (depth <= 200) {
+    let t = depth / 200;
+    return `rgb(0, ${150 - t*100}, ${255 - t*120})`;
+  }
+
+  if (depth <= 1000) {
+    let t = (depth - 200) / 800;
+    return `rgb(0, ${50 - t*50}, ${135 - t*120})`;
+  }
+
+  let t = Math.min((depth - 1000) / 11000, 1);
+  let val = Math.floor(20 - t * 20);
+  return `rgb(0, 0, ${val})`;
+};
+// scroll
+window.addEventListener("scroll", () => {
+
+  let raw = window.scrollY;
+  let depth = raw * scrollSpeed;
+
+  depth = Math.min(depth, 12000);
+
+  depthUI.innerText = Math.floor(depth) + " m";
+
+  if (depth >= 11234) {
+    ocean.style.background = "#000";
+  } else {
+    ocean.style.background = getOceanColor(depth);
+  }
+});
+
+// AMBIL ID DARI HTML
+// neritik
+const floating1 = document.getElementById("floating1");
+const terumbuKarang = document.getElementById("terumbuKarang");
+const terumbuKarang2 = document.getElementById("terumbuKarang2");
+const pausOrca = document.getElementById("pausOrca");
+const hiuPaus= document.getElementById("hiuPaus");
+const ikanBadut = document.getElementById("ikanBadut");
+const ikanKepeKepe = document.getElementById("ikanKepeKepe");
+const ikanKakap = document.getElementById("ikanKakap");
+const ikanSinga = document.getElementById("ikanSinga");
+const kudaLaut = document.getElementById("kudaLaut");
+const ikanDamsel = document.getElementById("ikanDamsel");
+const ikanKakatua = document.getElementById("ikanKakatua");
+const ikanBotana = document.getElementById("ikanBotana");
+const ikanTuna = document.getElementById("ikanTuna");
+const ikanBuntal = document.getElementById("ikanBuntal");
+const ikanNori = document.getElementById("ikanNori");
+const ikanAyamAyam = document.getElementById("ikanAyamAyam");
+const ikanGobi = document.getElementById("ikanGobi");
+const ikanPari = document.getElementById("ikanPari");
+const kerangKima = document.getElementById("kerangKima");
+const ikanSarden = document.getElementById("ikanSarden");
+const monas = document.getElementById("monas");
+const monasDesc = document.getElementById("monasDesc");
+const eufotik = document.getElementById("eufotik");
+const eufotikDesc = document.getElementById("eufotikDesc");
+// batial
+const floating2 = document.getElementById("floating2");
+const cumiCumiVampir = document.getElementById("cumiCumivampir");
+const ikanHantu = document.getElementById("ikanHantu");
+const ikanLentera = document.getElementById("ikanLentera");
+const kapakAirTawar = document.getElementById("kapakAirTawar");
+const ikanNagaHitam = document.getElementById("ikanNagaHitam");
+const loosejaw = document.getElementById("loosejaw");
+const sabertooth = document.getElementById("sabertooth");
+const ikanViper = document.getElementById("ikanViper");
+const bristlemouth = document.getElementById("bristlemouth");
+const ikanTaring = document.getElementById("ikanTaring");
+const belutSpiny = document.getElementById("belutSpiny");
+const ikanTeleskop = document.getElementById("ikanTeleskop");
+const slickhead = document.getElementById("slickhead");
+const belutGulper = document.getElementById("belutGulper");
+const ikanPenelanHitam = document.getElementById("ikanPenelanHitam");
+const oarRaksasa = document.getElementById("oarRaksasa");
+const blobFish = document.getElementById("blobFish");
+const kepitingLaba = document.getElementById("kepitingLaba");
+const jaring = document.getElementById("jaring");
+const burjKhalifa = document.getElementById("burjKhalifa");
+const burjKhalifaDesc = document.getElementById("burjKhalifaDesc");
+const midnight = document.getElementById("midnight");
+const midnightDesc = document.getElementById("midnightDesc");
+// abisal
+const floating3 = document.getElementById("floating3");
+const belutPelikan = document.getElementById("belutPelikan");
+const hiuHantu = document.getElementById("hiuHantu");
+const belutSnipe = document.getElementById("belutSnipe");
+const labalabaLautDalam = document.getElementById("labalabaLautDalam");
+const ikanKepalaHalus = document.getElementById("ikanKepalaHalus");
+const ikanTripod = document.getElementById("ikanTripod");
+const ikanNagaAbisal = document.getElementById("ikanNagaAbisal");
+const anglerfish = document.getElementById("anglerfish");
+const kodLautDalam = document.getElementById("kodLautDalam");
+const brotula = document.getElementById("brotula");
+const belutCusk = document.getElementById("belutCusk");
+const belutPout = document.getElementById("belutPout");
+const belutMoncongTumpul = document.getElementById("belutMoncongTumpul");
+const pariLautDalam = document.getElementById("pariLautDalam");
+const flounder = document.getElementById("flounder");
+const anglerfishLautDalam = document.getElementById("anglerfishLautDalam");
+const grenadier = document.getElementById("grenadier");
+const belutLautDalamRaksasa = document.getElementById("belutLautDalamRaksasa");
+const srg = document.getElementById("srg");
+const depth = document.getElementById("depth");
+const depthDesc = document.getElementById("depthDesc");
+// hadal
+const floating4 = document.getElementById("floating4");
+const hg = document.getElementById("hg");
+const sf = document.getElementById("sf");
+const everest = document.getElementById("everest");
+const everestDesc = document.getElementById("everestDesc");
+const mariana = document.getElementById("mariana");
+const marianaDesc = document.getElementById("marianaDesc");
+
+// POSISI
+function posisi(nama,x,y) {
+  nama.style.left = `${x}%`;
+  nama.style.top =(y / scrollSpeed) + "px";
+}
+function posisi2(nama,x,y,rot=0,sc=1) {
+  nama.style.left = `${x}%`;
+  nama.style.top =(y / scrollSpeed) + "px";
+  nama.style.transform = `rotate(${rot}deg) scale(${sc})`;
+}
+// neritik
+posisi(floating1,50,1)
+posisi2(terumbuKarang,0,20,90,4)
+posisi2(terumbuKarang2,90,27,270,4)
+posisi2(pausOrca,20,65,0,6)
+posisi2(hiuPaus,20,88,0,2.8)
+posisi2(ikanPari,70,100,0,2.5)
+posisi(ikanBadut,80,5)
+posisi(ikanKepeKepe,67,20)
+posisi(ikanKakap,65,15)
+posisi(ikanSinga,30,80)
+posisi(kudaLaut,45,26)
+posisi(ikanDamsel,20,11)
+posisi(ikanKakatua,40,30)
+posisi(ikanBotana,15,37)
+posisi(ikanTuna,28,177)
+posisi(ikanBuntal,68,85)
+posisi(ikanNori,56,50)
+posisi(ikanAyamAyam,55,78)
+posisi(ikanGobi,87,45)
+posisi(kerangKima,20,3)
+posisi(ikanSarden,73,130)
+posisi(monas,50,132)
+posisi(monasDesc,50,133)
+posisi(eufotik,50,150)
+posisi(eufotikDesc,50,151)
+// batial
+posisi(floating2,50,200)
+posisi(cumiCumiVampir,25,600)
+posisi(ikanHantu,39,1380)
+posisi(ikanLentera,88,220)
+posisi(kapakAirTawar,68,320)
+posisi(ikanNagaHitam,50,1240)
+posisi2(loosejaw,32,427,0,2.6)
+posisi(sabertooth,41,550)
+posisi(ikanViper,79,617)
+posisi(bristlemouth,17,1460)
+posisi(ikanTaring,32,680)
+posisi(belutSpiny,70,771)
+posisi(ikanTeleskop,22,845)
+posisi(slickhead,60,910)
+posisi(belutGulper,40,1020)
+posisi(ikanPenelanHitam,90,1140)
+posisi2(oarRaksasa,30,207,0,3)
+posisi2(blobFish,22,700,0,1.5)
+posisi2(kepitingLaba,0,300,90,2)
+posisi2(jaring,50,1500,0,15)
+posisi(burjKhalifa,50,830)
+posisi(burjKhalifaDesc,50,831)
+posisi(midnight,50,1000)
+posisi(midnightDesc,50,1001)
+// abisal
+posisi(floating3,50,2000)
+posisi(belutPelikan,60,2134)
+posisi(hiuHantu,12,2300)
+posisi2(belutSnipe,80,2450,0,2)
+posisi2(labalabaLautDalam,26,2635,0,2.4)
+posisi(ikanKepalaHalus,44,2910)
+posisi(ikanTripod,89,3090)
+posisi(ikanNagaAbisal,18,3310)
+posisi(anglerfish,32,3570)
+posisi(kodLautDalam,71,3730)
+posisi(brotula,50,3950)
+posisi(belutCusk,30,4200)
+posisi(belutPout,84,4470)
+posisi(belutMoncongTumpul,62,4580)
+posisi(pariLautDalam,24,4610)
+posisi(flounder,66,4865)
+posisi(anglerfishLautDalam,15,5121)
+posisi(grenadier,77,5380)
+posisi(belutLautDalamRaksasa,58,5600)
+posisi2(srg,50,5760,0,14)
+posisi(depth,50,3700)
+posisi(depthDesc,50,3701)
+// hadal
+posisi(floating4,50,6000)
+posisi(hg,71,10467)
+posisi(sf,22,8300)
+posisi(everest,50,8849)
+posisi(everestDesc,50,8850)
+posisi(mariana,50,11034)
+posisi(marianaDesc,50,11035)
+
+// KLIK
+function click(nama, info){
+  nama.onclick = () => {
+    document.getElementById("popupText").innerText = info;
+    document.getElementById("popup").style.display = "block";
+  };
+}
+// neritik
+click(floating1,"ini adalah zona neritik 0-200m")
+click(terumbuKarang,"ini adalah zona neritik 0-200m")
+click(terumbuKarang2,"ini adalah zona neritik 0-200m")
+click(pausOrca,"ini adalah zona neritik 0-200m")
+click(hiuPaus,"ini adalah zona neritik 0-200m")
+click(ikanBadut,"ini adalah zona neritik 0-200m")
+click(ikanKepeKepe,"ini adalah zona neritik 0-200m")
+click(ikanKakap,"ini adalah zona neritik 0-200m")
+click(ikanSinga,"ini adalah zona neritik 0-200m")
+click(kudaLaut,"ini adalah zona neritik 0-200m")
+click(ikanDamsel,"ini adalah zona neritik 0-200m")
+click(ikanBotana,"ini adalah zona neritik 0-200m")
+click(ikanTuna,"ini adalah zona neritik 0-200m")
+click(ikanBuntal,"ini adalah zona neritik 0-200m")
+click(ikanNori,"ini adalah zona neritik 0-200m")
+click(ikanAyamAyam,"ini adalah zona neritik 0-200m")
+click(ikanGobi,"ini adalah zona neritik 0-200m")
+click(ikanPari,"ini adalah zona neritik 0-200m")
+click(kerangKima,"ini adalah zona neritik 0-200m")
+click(ikanSarden,"ini adalah zona neritik 0-200m")
+// batial
+click(floating2,"ini adalah zona neritik 0-200m")
+click(cumiCumiVampir,"ini adalah zona neritik 0-200m")
+click(ikanHantu,"ini adalah zona neritik 0-200m")
+click(ikanLentera,"ini adalah zona neritik 0-200m")
+click(kapakAirTawar,"ini adalah zona neritik 0-200m")
+click(ikanNagaHitam,"ini adalah zona neritik 0-200m")
+click(loosejaw,"ini adalah zona neritik 0-200m")
+click(sabertooth,"ini adalah zona neritik 0-200m")
+click(ikanViper,"ini adalah zona neritik 0-200m")
+click(bristlemouth,"ini adalah zona neritik 0-200m")
+click(ikanTaring,"ini adalah zona neritik 0-200m")
+click(belutSpiny,"ini adalah zona neritik 0-200m")
+click(ikanTeleskop,"ini adalah zona neritik 0-200m")
+click(slickhead,"ini adalah zona neritik 0-200m")
+click(belutGulper,"ini adalah zona neritik 0-200m")
+click(ikanPenelanHitam,"ini adalah zona neritik 0-200m")
+click(oarRaksasa,"ini adalah zona neritik 0-200m")
+click(blobFish,"ini adalah zona neritik 0-200m")
+click(kepitingLaba,"ini adalah zona neritik 0-200m")
+click(jaring,"ini adalah zona neritik 0-200m")
+// abisal
+click(floating3,"ini adalah zona neritik 0-200m")
+click(belutPelikan,"ini adalah zona neritik 0-200m")
+click(hiuHantu,"ini adalah zona neritik 0-200m")
+click(belutSnipe,"ini adalah zona neritik 0-200m")
+click(labalabaLautDalam,"ini adalah zona neritik 0-200m")
+click(ikanKepalaHalus,"ini adalah zona neritik 0-200m")
+click(ikanTripod,"ini adalah zona neritik 0-200m")
+click(ikanNagaAbisal,"ini adalah zona neritik 0-200m")
+click(anglerfish,"ini adalah zona neritik 0-200m")
+click(kodLautDalam,"ini adalah zona neritik 0-200m")
+click(brotula,"ini adalah zona neritik 0-200m")
+click(belutCusk,"ini adalah zona neritik 0-200m")
+click(belutPout,"ini adalah zona neritik 0-200m")
+click(belutMoncongTumpul,"ini adalah zona neritik 0-200m")
+click(pariLautDalam,"ini adalah zona neritik 0-200m")
+click(flounder,"ini adalah zona neritik 0-200m")
+click(anglerfishLautDalam,"ini adalah zona neritik 0-200m")
+click(grenadier,"ini adalah zona neritik 0-200m")
+click(belutLautDalamRaksasa,"ini adalah zona neritik 0-200m")
+click(srg,"ini adalah zona neritik 0-200m")
+// hadal
+click(floating4,"ini adalah zona neritik 0-200m")
+click(hg,"ini adalah zona neritik 0-200m")
+click(sf,"ini adalah zona neritik 0-200m")
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+</script>
+
+</body>
+</html>
